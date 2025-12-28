@@ -17,7 +17,7 @@ def predict(data: dict):
     df = pd.DataFrame([data])
     prediction = model.predict(df)[0]
     probability = model.predict_proba(df).max()
-    
+
     return {
         "prediction": int(prediction),
         "confidence": float(probability)
