@@ -10,20 +10,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.12.9'
+        python-version: "3.12.9"
 
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
+        pip install pytest flake8
 
+    # -------- LINTING STEP --------
+    - name: Run linting (flake8)
+      run: |
+        flake8 . --ignore=E501 --exclude=venv,__pycache__,mlruns
+
+    # -------- UNIT TESTS --------
     - name: Run unit tests
-      run: python -m pytest -v
+      run: |
+        python -m pytest -v
 
     - name: Train model
       run: |
