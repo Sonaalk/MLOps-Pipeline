@@ -2,11 +2,13 @@ import mlflow.sklearn
 import pandas as pd
 import os
 
+
 # Check if trained model loads correctly
 def test_model_load():
     model_path = os.path.join("models", "final_model")
     model = mlflow.sklearn.load_model(model_path)
     assert model is not None
+
 
 # Check if model can make a prediction
 def test_model_prediction():
